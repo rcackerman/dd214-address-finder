@@ -1,32 +1,34 @@
-var branchStatusMatrix = [{
-    branch: "airForce",
-    options: [
-      {
-        id: "discharged-deceased-retired",
-        text: "Discharged, deceased, or retired"
+var branchStatusMatrix = {
+  airForce: [{
+      id: "",
+      text: ""
+    }, {
+      id: "discharged-deceased-retired",
+      text: "Discharged, deceased, or retired"
+    }, {
+      id: "active",
+      text: "active"
+    }, {
+      id: "tdrl",
+      text: "TDRL"
+    }, {
+      id: "general-officers-w-pay",
+      text: "General officers retired with pay"
+    }, {
+      id: "reserve",
+      text: "Reserve"
+    }, {
+      id: "irr",
+      text: "IRR"
+    }, {
+      id: "retired-reserve-non-pay",
+      text: "Retired Reserve in non-pay status"
+    }
+  ], 
+  coastGuard: [{
+        id: "",
+        text: ""
       }, {
-        id: "active",
-        text: "active"
-      }, {
-        id: "tdrl",
-        text: "TDRL"
-      }, {
-        id: "general-officers-w-pay",
-        text: "General officers retired with pay"
-      }, {
-        id: "reserve",
-        text: "Reserve"
-      }, {
-        id: "irr",
-        text: "IRR"
-      }, {
-        id: "retired-reserve-non-pay",
-        text: "Retired Reserve in non-pay status"
-      }]
-  }, {
-    branch: "coastGuard",
-    options: [
-      {
         id: "discharged-deceased-retired",
         text: "Discharged, deceased, or retired"
       }, {
@@ -41,10 +43,12 @@ var branchStatusMatrix = [{
       }, {
         id: "tdrl",
         text: "TDRL"
-      }]
-  }, {
-    branch: "marineCorps",
-    options: [
+      }
+  ],
+  marineCorps: [{
+        id: "",
+        text: ""
+      }, 
       {
         id: "discharged-deceased-retired",
         text: "Discharged, deceased, or retired"
@@ -60,10 +64,12 @@ var branchStatusMatrix = [{
       }, {
         id: "tdrl",
         text: "TDRL"
-      }]
-  }, {
-    branch: "army",
-    options: [
+      }
+  ],
+  army: [{
+        id: "",
+        text: ""
+      }, 
       {
         id: "discharged-deceased-retired",
         text: "Discharged, deceased, or retired"
@@ -73,10 +79,12 @@ var branchStatusMatrix = [{
       }, {
         id: "reserve",
         text: "Reserve (including Individual Ready Reserve)"
-      }]
-  }, {
-    branch: "navy",
-    options: [
+      }
+  ],
+  navy: [{
+        id: "",
+        text: ""
+      }, 
       {
         id: "discharged-deceased-retired",
         text: "Discharged, deceased, or retired"
@@ -89,19 +97,33 @@ var branchStatusMatrix = [{
       }, {
         id: "tdrl",
         text: "TDRL"
-      }]
-  }, {
-    branch: "publicHealthService",
-    options: [
+      }
+  ],
+  publicHealthService: [{
+        id: "",
+        text: ""
+      }, 
       {
         id: "commissioned-corps-officers",
         text: "Public Health Service - Commissioned Crops officers only"
-      }]
-  }]
+      }
+  ]
+}
+
+var populateStatusDropdown = function(branch) {
+  $("#current-status-select").empty();
+  $("#current-status-select").append(
+    $.map(branchStatusMatrix[branch], function(i){
+      return $("<option>").val(i.id).text(i.text);
+    })
+  );
+}
+
+var display
 
 $( document ).ready(function(){
-  $('select').on('change', function() {
-    console.log( this.value );
-    console.log(branchStatusMatrix[0]);
+  $('#branch-select').on('change', function() {
+    $("#current-status").show();
+      populateStatusDropdown(this.value);
   });
 });
