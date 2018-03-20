@@ -119,11 +119,27 @@ var populateStatusDropdown = function(branch) {
   );
 }
 
-var display
+var getRetirementDate = function(dateString) {
+}
+
 
 $( document ).ready(function(){
+  // When the branch dropdown changes, populate the current status dropdown with
+  // the applicable options
   $('#branch-select').on('change', function() {
+    // keep track of the branch
+    branch = this.value;
     $("#current-status").show();
       populateStatusDropdown(this.value);
+  });
+
+  // When the current status dropdown changes, check to see if the option was
+  // discharged-deceased-retired, and then show the discharge date field set
+  $('#current-status').on('change', "#current-status-select", function(event) {
+    // keep track of current status
+    currStatus = this.value;
+    if (this.value == 'discharged-deceased-retired') {
+      $("#discharge-date").show();
+    }
   });
 });

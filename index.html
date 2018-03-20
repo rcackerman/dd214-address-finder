@@ -5,64 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
   #current-status {
     display: none; 
   }
-  #rank {
+  #discharge-date {
     display: none;
   }
 </style>
     <title>DD214 Address Finder</title>
   </head>
   <body>
-    <h1>DD214 Address Finder</title>
-    <form>
-      <div id="branch">
-        <label for="branch-select">Branch:</label>
-        <select id="branch-select">
-          <option selected></option>
-          <option value="airForce">Air Force</option>
-          <option value="army">Army</option>
-          <option value="coastGuard">Coast Guard</option>
-          <option value="marineCorps">Marine Corps</option>
-          <option value="navy">Navy</option>
-          <option value="publicHealthService">PHS</option>
-        </select>
-      </div>
+    <main class="container">
+      <h1>DD214 Address Finder</h1>
+      <form>
+        <div class="form-group" id="branch">
+          <label for="branch-select">Branch:</label>
+          <select class="form-control" id="branch-select">
+            <option selected></option>
+            <option value="airForce">Air Force</option>
+            <option value="army">Army</option>
+            <option value="coastGuard">Coast Guard</option>
+            <option value="marineCorps">Marine Corps</option>
+            <option value="navy">Navy</option>
+            <option value="publicHealthService">PHS</option>
+          </select>
+        </div>
 
-      <div id="current-status">
-        <label for="current-status-select">Current Status of Service Member:</label>
-        <select id="current-status-select">
-          <option selected></option>
-          <!--<option value="discharged-deceased-retired">Discharged, Deceased, or Retired</option>-->
-          <!--<option value="active">Active</option> [> This includes national guard on active duty in AF <]-->
-          <!--<option value="tdrl">TDRL</option>-->
-          <!--<option value="officers-retired-pay">General Officers Retired with Pay</option>-->
-          <!--<option value="reserve">Reserve</option>-->
-          <!--<option value="irr">IRR</option>-->
-          <!--<option value="retired-reserve-nonpay">Retired Reserve in Non-Pay Status</option>-->
-          <!--<option value="national-guard-officers-no-active-duty">Current National Guard Officers not on Active Duty in the Air Force</option>-->
-          <!--<option value="national-guard-released">National Guard Released from Active Duty in the Air Force</option>-->
-          <!--<option value="selected-marine-corps-reserve">Selected Marine Corps Reserve</option>-->
-          <!--<option value="national-guard">National Guard</option>-->
-          <!--<option value="commissioned-corps">PHS - Commissioned Corps Officers Only</option>-->
-        </select>
-      </div>
+        <div class="form-group" id="current-status">
+          <label for="current-status-select">Current Status of Service Member:</label>
+          <select class="form-control" id="current-status-select">
+          </select>
+        </div>
 
-      <div id="rank">
-        <label for="rank-select">Service Details:</label>
-        <select id="rank-select">
-          <option selected></option>
-          <option value="enlisted">Enlisted</option>
-          <option value="officer">Officer</option>
-        </select>
-      </div>
-    </form>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.js"
-      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-      crossorigin="anonymous"></script>
-    <script src="app.js"></script>
+        <div class="form-group" id="discharge-date">
+          <label for="discharge-date-fields">Date discharged, deceased, or retired</label>
+          <div class="form-row">
+            <div class="form-group col-2">
+              <label for="d-month">Month</label>
+              <input type="text" size="2" class="form-control" id="d-month">
+            </div>
+            <div class="form-group col-2">
+              <label for="d-day">Day</label>
+              <input type="text" size="2" class="form-control" id="d-day">
+            </div>
+            <div class="form-group col-2">
+              <label for="d-year">Year</label>
+              <input type="text" size="4" class="form-control" id="d-year">
+            </div>
+        </div>
+      </form>
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+      <script src="app.js"></script>
+    </main>
   </body>
 </html>
