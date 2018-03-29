@@ -7,22 +7,41 @@ var branchStatusMatrix = {
       text: "Discharged, deceased, or retired"
     }, {
       id: "active",
-      text: "active"
+      text: "Active",
+      personnel: 1
     }, {
       id: "tdrl",
-      text: "TDRL"
+      text: "TDRL",
+      personnel: 1
     }, {
       id: "general-officers-w-pay",
-      text: "General officers retired with pay"
+      text: "General officers retired with pay",
+      personnel: 1
     }, {
       id: "reserve",
-      text: "Reserve"
+      text: "Reserve",
+      personnel: 2
     }, {
       id: "irr",
-      text: "IRR"
+      text: "IRR",
+      personnel: 2
     }, {
       id: "retired-reserve-non-pay",
-      text: "Retired Reserve in non-pay status"
+      text: "Retired Reserve in non-pay status",
+      personnel: 2
+    }, {
+      id: "curr-ng-officers-not-ad",
+      text: "Current National Guard officers not on active duty in the Air Force",
+      personnel: 2
+    }, {
+      id: "ng-released-from-ad",
+      text: "National Guard released from active duty in the Air Force",
+      personnel: 2
+    }, {
+      id: "curr-ng-enlisted-not-ad",
+      text: "Current National Guard enlisted not on active duty in the Air Force",
+      personnel: 2,
+      medserv: 13
     }
   ], 
   coastGuard: [{
@@ -33,16 +52,20 @@ var branchStatusMatrix = {
         text: "Discharged, deceased, or retired"
       }, {
         id: "active",
-        text: "Active"
+        text: "Active",
+        personnel: 3
       }, {
         id: "reserve",
-        text: "Reserve"
+        text: "Reserve",
+        personnel: 3
       }, {
         id: "individual-ready-reserve",
-        text: "Individual Ready Reserve"
+        text: "Individual Ready Reserve",
+        personnel: 3
       }, {
         id: "tdrl",
-        text: "TDRL"
+        text: "TDRL",
+        personnel: 3
       }
   ],
   marineCorps: [{
@@ -54,16 +77,20 @@ var branchStatusMatrix = {
         text: "Discharged, deceased, or retired"
       }, {
         id: "individual-ready-reserve",
-        text: "Individual Ready Reserve"
+        text: "Individual Ready Reserve",
+        personnel: 5
       }, {
         id: "active",
-        text: "Active"
+        text: "Active",
+        personnel: 4
       }, {
         id: "selected-marine-corps-reserve",
-        text: "Selected Marine Corps Reserve"
+        text: "Selected Marine Corps Reserve",
+        personnel: 4
       }, {
         id: "tdrl",
-        text: "TDRL"
+        text: "TDRL",
+        personnel: 4
       }
   ],
   army: [{
@@ -72,13 +99,19 @@ var branchStatusMatrix = {
       }, 
       {
         id: "discharged-deceased-retired",
-        text: "Discharged, deceased, or retired"
+        text: "Discharged, deceased, or retired (including TDRL)"
       }, {
         id: "active",
-        text: "Active"
+        text: "Active",
+        personnel: 7
       }, {
         id: "reserve",
-        text: "Reserve (including Individual Ready Reserve)"
+        text: "Reserve (including Individual Ready Reserve)",
+        personnel: 7
+      }, {
+        id: "national-guard",
+        text: "National Guard",
+        personnel: 7
       }
   ],
   navy: [{
@@ -87,16 +120,19 @@ var branchStatusMatrix = {
       }, 
       {
         id: "discharged-deceased-retired",
-        text: "Discharged, deceased, or retired"
+        text: "Discharged, deceased, or retired",
       }, {
         id: "active",
-        text: "Active"
+        text: "Active",
+        personnel: 10
       }, {
         id: "reserve",
-        text: "Reserve"
+        text: "Reserve",
+        personnel: 10
       }, {
         id: "tdrl",
-        text: "TDRL"
+        text: "TDRL",
+        personnel: 10
       }
   ],
   publicHealthService: [{
@@ -105,21 +141,41 @@ var branchStatusMatrix = {
       }, 
       {
         id: "commissioned-corps-officers",
-        text: "Public Health Service - Commissioned Crops officers only"
+        text: "Public Health Service - Commissioned Crops officers only",
+        personnel: 12
       }
   ]
 }
 
 var populateStatusDropdown = function(branch) {
-  $("#current-status-select").empty();
-  $("#current-status-select").append(
+  $("#current-status").show();
+  $("#current-status-select").empty().append(
     $.map(branchStatusMatrix[branch], function(i){
-      return $("<option>").val(i.id).text(i.text);
+      return $("<option>").val(i.id)
+                          .text(i.text)
+                          .data('personnel', i.personnel)
+                          .data('medserv', i.medserv);
     })
   );
 }
 
+var clearResults = function() {
+  $("#results").children().hide();
+  $("#discharge-date").hide();
+  $("#discharge-date").find("input").val("");
+  return true;
+}
+
 var getRetirementDate = function(dateString) {
+}
+
+var getWhereToSend = function(destinationDict) {
+  // Find the personnel and medical/service treatment location
+  // using data from the #current-status-select option chosen
+  $.each($('#current-status-select option:selected').data(), function(k,v){
+    $("#results").show();
+    $("#address" + v).show();
+  })
 }
 
 
@@ -129,16 +185,21 @@ $( document ).ready(function(){
   $('#branch-select').on('change', function() {
     // keep track of the branch
     branch = this.value;
-    $("#current-status").show();
-      populateStatusDropdown(this.value);
+
+    clearResults();
+    populateStatusDropdown(this.value);
   });
 
   // When the current status dropdown changes, check to see if the option was
-  // discharged-deceased-retired, and then show the discharge date field set
+  // discharged-deceased-retired, and then show the discharge date field set.
+  // If any other option, show the correct place to send information. 
   $('#current-status').on('change', "#current-status-select", function(event) {
+    clearResults();
     // keep track of current status
-    currStatus = this.value;
-    if (this.value == 'discharged-deceased-retired') {
+    if (this.value != 'discharged-deceased-retired') {
+      personnelDestination = $('#current-status-select option:selected').data('personnel');
+      getWhereToSend(personnelDestination);
+    } else {
       $("#discharge-date").show();
     }
   });

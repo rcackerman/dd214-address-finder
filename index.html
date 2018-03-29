@@ -13,6 +13,9 @@
   #discharge-date {
     display: none;
   }
+  #results .col-6 {
+    display: none;
+  }
 </style>
     <title>DD214 Address Finder</title>
   </head>
@@ -32,7 +35,6 @@
             <option value="publicHealthService">PHS</option>
           </select>
         </div>
-
         <div class="form-group" id="current-status">
           <label for="current-status-select">Current Status of Service Member:</label>
           <select class="form-control" id="current-status-select">
@@ -54,8 +56,125 @@
               <label for="d-year">Year</label>
               <input type="text" size="4" class="form-control" id="d-year">
             </div>
+          </div>
         </div>
       </form>
+      <div class="row" id="results">
+        <div class="col-6" id="address1">
+          <address>
+            Air Force Personnel Center<br>
+            HQ AFPC/DPSIRP<br>
+            550 C Street West, Suite 19<br>
+            Randolph AFB, TX 78150-4721<br>
+          </address>
+        </div>
+        <div class="col-6" id="address2">
+          <address>
+            Air Reserve Personnel Center<br>
+            Records Management Branch (DPTSC)<br>
+            18420 E. Silver Creek Avenue<br>
+            Building 390 MS 68<br>
+            Buckley AFB, CO 80011
+          </address>
+        </div>
+        <div class="col-6" id="address3">
+          <address>
+            Commander, Personnel Service Center<br>
+            (BOPS-C-MR) MS7200<br>
+            US Coast Guard<br>
+            2703 Martin Luther King Jr Ave SE<br>
+            Washington, DC 20593-7200<br>
+            MR_CustomerService@uscg.mil
+          </address>
+        </div>
+        <div class="col-6" id="address4">
+          <address>
+            Headquarters U.S. Marine Corps<br>
+            Manpower Management Records &amp; Performance<br>
+            (MMRP-10)<br>
+            2008 Elliot Road<br>
+            Quantico, VA 22134-5030
+          </address>
+        </div>
+        <div class="col-6" id="address5">
+          <address>
+            Marine Forces Reserve<br>
+            2000 Opelousas Avenue<br>
+            New Orleans, LA 70146-5400
+          </address>
+        </div>
+        <div class="col-6" id="address6">
+          <address>
+            National Archives &amp; Records Administration<br>
+            Research Services (RDT1R)<br>
+            700 Pennsylvania Avenue NW<br>
+            Washington, DC 20408-0001 
+          </address>
+        </div>
+        <div class="col-6" id="address7">
+          <address>
+            <a href="https://www.hrc.army.mil/TAGD/Accessing%20or%20Requesting%20Your%20Official%20Military%20Personnel%20File%20Documents">US Army Human Resources Command’s web page</a><br>
+            or 1-888-ARMYHRC (1-888-276-9472)
+          </address>
+        </div>
+        <div class="col-6" id="address8">
+          <address>
+            Navy Medicine Records Activity (NMRA)<br>
+            BUMED Detachment St. Louis<br>
+            4300 Goodfellow Boulevard, Building 103<br>
+            St. Louis, MO 63120
+          </address>
+        </div>
+        <div class="col-6" id="address9">
+          <address>
+            AMEDD Record Processing Center<br>
+            3370 Nacogdoches Road, Suite 116<br>
+            San Antonio, TX 78217
+          </address>
+        </div>
+        <div class="col-6" id="address10">
+          <address>
+            Navy Personnel Command (PERS-313)<br>
+            5720 Integrity Drive<br>
+            Millington, TN 38055-3120
+          </address>
+        </div>
+        <div class="col-6" id="address11">
+          <address>
+            Department of Veterans Affairs<br>
+            Records Management Center<br>
+            ATTN: Release of Information<br>
+            P.O. Box 5020<br>
+            St. Louis, MO 63115-5020
+          </address>
+        </div>
+        <div class="col-6" id="address12">
+          <address>
+            Division of Commissioned Corps Officer Support<br>
+            ATTN: Records Officer<br>
+            1101 Wooton Parkway, Plaza Level, Suite 100<br>
+            Rockville, MD 20852
+          </address>
+        </div>
+        <div class="col-6" id="address13">
+          <address>
+            AF STR Processing Center<br>
+            ATTN: Release of Information<br>
+            3370 Nacogdoches Road, Suite 116<br>
+            San Antonio, TX 78217
+          </address>
+        </div>
+        <div class="col-6" id="address14">
+          <address>
+            National Personnel Records Center<br>
+            (Military Personnel Records)<br>
+            1 Archives Drive<br>
+            St. Louis, MO 63138-1002<br>
+            <a href="http://www.archives.gov/veterans/military-service-records/">eVetRecs</a>
+          </address>
+        </div>
+      </div>
+
       <script
         src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
