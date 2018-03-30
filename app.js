@@ -167,12 +167,13 @@ var clearResults = function() {
 }
 
 var getRetirementDate = function(dateString) {
+  return true;
 }
 
 var getWhereToSend = function(destinationDict) {
   // Find the personnel and medical/service treatment location
   // using data from the #current-status-select option chosen
-  $.each($('#current-status-select option:selected').data(), function(k,v){
+  $.each(destinationDict, function(k,v){
     $("#results").show();
     $("#address" + v).show();
   })
@@ -183,24 +184,31 @@ $( document ).ready(function(){
   // When the branch dropdown changes, populate the current status dropdown with
   // the applicable options
   $('#branch-select').on('change', function() {
-    // keep track of the branch
-    branch = this.value;
-
     clearResults();
     populateStatusDropdown(this.value);
+    // Keep track of the branch chosen by adding data to the form
+    $("#finder").data('branch', this.value);
   });
 
   // When the current status dropdown changes, check to see if the option was
   // discharged-deceased-retired, and then show the discharge date field set.
-  // If any other option, show the correct place to send information. 
-  $('#current-status').on('change', "#current-status-select", function(event) {
+  $('#current-status').on('change', "#current-status-select", function() {
     clearResults();
-    // keep track of current status
+
     if (this.value != 'discharged-deceased-retired') {
-      personnelDestination = $('#current-status-select option:selected').data('personnel');
-      getWhereToSend(personnelDestination);
+      // Keep track of where to send the request by adding data to the form
+      var destinations = $( this ).children( 'option:selected' ).data();
+      $("#finder").data(destinations);
+      // Show the submit button at this point
+      $("button").show();
     } else {
       $("#discharge-date").show();
     }
   });
+
+  $("#finder").on("submit", function(event){
+      getWhereToSend($(this).data());
+      event.preventDefault();
+  });
+
 });
