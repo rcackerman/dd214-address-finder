@@ -168,8 +168,8 @@ var clearResults = function() {
 }
 
 var getRetirementDischargeDate = function(formSection) {
-  let m = formSection.find("#d-month").val();
-  let d = formSection.find("#d-day").val();
+  let m = formSection.find("#d-month option:selected").val();
+  let d = formSection.find("#d-day option:selected").val();
   let y = formSection.find("#d-year").val();
   return new Date(y, m, d);
 }
