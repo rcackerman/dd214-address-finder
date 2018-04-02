@@ -163,6 +163,7 @@ var clearResults = function() {
   $("#results").children().hide();
   $("#finder").removeData("personnel").removeData("medserve");
   $("#discharge-date").hide();
+  $("#discharge-date").find("select").val("");
   $("#discharge-date").find("input").val("");
   return true;
 }
